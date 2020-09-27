@@ -8,9 +8,10 @@ import Product from "./components/product";
 
 import queryString from "query-string";
 
-import {useRoutes} from 'hookrouter';
+import {useRoutes, useRedirect} from 'hookrouter';
 import Routes from './route'
 
+import NotFound from "./components/404";
 
 function App() {
     document.body.style = "background-color: #eeeeee;";
@@ -50,14 +51,16 @@ function App() {
     return (
         <div>
 
-            <div className=" menu-search  menu-size">
+            <div className="menu-search  menu-size">
                 <div className=" container">
                     <div className=" mx-auto ">
                         <div className="row  menu-search ">
                             <div className="col-2">
+                            <a href="/">
                                 <div className="navbar-brand">
-                                <a href="/"><img src={Logo_small} alt="logo"></img></a>
+                                <img src={Logo_small} alt="logo"></img>
                                 </div>
+                                </a>
                             </div>
                             <div className="col-10">
                                 <form className="example" action="/item">
@@ -85,13 +88,13 @@ function App() {
                 </div>
             </div>
 
+
+
             <div className="container">
 
                 <div className="centerProduct">
-                    <Product search={search} />
+                {routeResult || NotFound}
                 </div>
-
-                {routeResult}
 
             </div>
 

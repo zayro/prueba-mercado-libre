@@ -1,22 +1,46 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./index.css";
 
-function ProductDetail() {
+function ProductDetail({productId}) {
     const [info, setInfo] = useState([]);
     const [descrip, setDescrip] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [currency, setCurrency] = useState([]);
 
-    const { id } = useParams();
+
 
     useEffect(() => {
+
+        const category = async (categoryId) => {
+
+            const response = await axios.get(`https://api.mercadolibre.com/sites/MLA/search?category=${categoryId}`);
+            const data = await response;
+
+
+            setCategory(data.data.filters[0].values[0].path_from_root);
+        }
+
+        const currency = async (id) => {
+            const response = await axios.get(
+                `https://api.mercadolibre.com/currencies/${id}`
+            );
+            const data = await response;
+            console.log(data);
+            setCurrency(data.data.symbol)
+
+
+            //setCategory(data.data.filters[0].values[0].path_from_root);
+        };
+
+
         const fetchData = () => {
             axios
                 .request({
                     method: "get",
-                    url: `https://api.mercadolibre.com/items/${id}`,
+                    url: `https://api.mercadolibre.com/items/${productId}`,
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -24,6 +48,8 @@ function ProductDetail() {
                 })
                 .then((response) => {
                     setInfo([response.data]);
+                    category(response.data.category_id);
+                    currency(response.data.currency_id)
                 })
                 .catch((error) => {
                     console.log(error);
@@ -32,7 +58,7 @@ function ProductDetail() {
             axios
                 .request({
                     method: "get",
-                    url: `https://api.mercadolibre.com/items/${id}/description`,
+                    url: `https://api.mercadolibre.com/items/${productId}/description`,
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -40,19 +66,41 @@ function ProductDetail() {
                 })
                 .then((response) => {
                     setDescrip([response.data]);
+                    //setCategory(response.data.category_id);
+                    console.log(response.data);
+
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+
         };
 
         fetchData();
-    }, [id]);
+    }, [productId]);
 
     return (
         <div>
+
+                    <div className="row">
+                    <div className="breadcrumbStyle">
+                        <ol className="breadcrumb">
+                            {category.map(function (item, index) {
+                                return (
+                                    <li className="breadcrumb-item" key={index}>
+                                        {item.name}
+                                    </li>
+                                );
+                            })}
+                        </ol>
+                    </div>
+                </div>
+
+
             {info.map((item, index) => {
                 return (
+
+
                     <div className="row" key={index}>
                         <div className=" card-size">
                             <div className="row">
@@ -72,7 +120,7 @@ function ProductDetail() {
                                             {item.title}
                                         </h5>
                                         <p className="price">
-                                            {item.price}
+                                           {currency} {item.price.toLocaleString()}
                                         </p>
                                         <p className="card-text">
                                         <button type="button" className="btn btn-primary btn-lg">Comprar</button>
@@ -83,7 +131,11 @@ function ProductDetail() {
                         </div>
                     </div>
                 );
-            })}
+            })
+
+
+            }
+
 
             {descrip.map((item, index) => {
                 return (
@@ -93,8 +145,14 @@ function ProductDetail() {
                     </div>
                 );
             })}
-        </div>
+
+
+</div>
+
+
+
     );
+
 }
 
 export default connect()(ProductDetail);

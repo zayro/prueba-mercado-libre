@@ -5,19 +5,20 @@ import "./index.scss";
 
 import envio from "../../assets/images/envio-small.png";
 
-import {
-    BrowserRouter as Router,
-    Link
-  } from "react-router-dom";
+import queryString from "query-string";
 
- function Product(props) {
+import { navigate } from "hookrouter";
 
+function Product({ search }) {
     const [filter, setFilter] = useState([]);
+    const [category, setCategory] = useState([]);
+
+
 
     useEffect(() => {
 
-        const fetchData = (search) => {
 
+        const fetchData = (search) => {
             axios
                 .request({
                     method: "get",
@@ -30,70 +31,107 @@ import {
                 .then(function (response) {
                     setFilter(response.data.results);
 
+                    const found = response.data.available_filters.find(
+                        (element) => element.id === "category");
+
+                    setCategory(found.values);
+
+
+
+
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        if(props.search !== '' && typeof props.search !== 'undefined'){
-            fetchData(props.search)
+        let params = queryString.parse(document.location.search);
+
+        if (
+            params !== "" &&
+            typeof params !== "undefined" &&
+            Object.keys(params).length !== 0
+        ) {
+            fetchData(params.search);
         }
 
-    }, [props.search]);
+        if (search !== "" && typeof search !== "undefined") {
+            fetchData(search);
+        }
+    }, [search]);
 
+    function redirect(id) {
+        navigate(`/item/${id}`);
+        console.log("redirect", id);
+    }
 
     return (
-        <div className="row">
-            {filter.slice(0, 4).map(function (item, index) {
-                return (
+        <div>
+            <div className="row">
+                <div className="breadcrumbStyle">
+                    <ol className="breadcrumb">
+                        {category.map(function (item, index) {
+                            return (
+                                <li className="breadcrumb-item" key={index}>
+                                    {item.name}
+                                </li>
+                            );
+                        })}
+                    </ol>
+                </div>
+            </div>
 
-                    <div className=" card-size" key={index}>
-                       <Router> <Link to={`/item/${item.id}`}>
-                        <div className="row">
-                            <div className="col-md-4 mx-auto text-center">
-                                <div className="mx-auto ">
-                                    <img
-                                        src={item.thumbnail}
-                                        className=" mx-auto "
-                                        alt="Responsive"
-                                        width="180"
-                                        height="180"
-                                    />
+            <div className="row">
+                {filter.slice(0, 4).map(function (item, index) {
+                    return (
+                        <div className="handleMouse card-size" key={index}>
+                            <div
+                                className="row"
+                                onClick={() => redirect(item.id)}
+                            >
+                                <div className="col-md-4 mx-auto text-center">
+                                    <div className="mx-auto ">
+                                        <img
+                                            src={item.thumbnail}
+                                            className=" mx-auto "
+                                            alt="Responsive"
+                                            width="180"
+                                            height="180"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            $ {item.price.toLocaleString()}
+                                            {item.shipping.free_shipping ? (
+                                                <img src={envio} alt="envio" />
+                                            ) : (
+                                                ""
+                                            )}
+                                        </h5>
+                                        <p className="card-text">
+                                            {item.title}
+                                        </p>
+                                        <p className="card-text">
+                                            <small className="text-muted"></small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-md-2">
+                                    <div className="card-body">
+                                        {item.address.city_name}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="card-body">
-                                    <h5 className="card-title">
-                                        $ {item.price}{" "}
-                                        {item.shipping.free_shipping ? (
-                                            <img src={envio} alt="envio" />
-                                        ) : (
-                                            ""
-                                        )}
 
-                                    </h5>
-                                    <p className="card-text">{item.title}</p>
-                                    <p className="card-text">
-                                        <small className="text-muted"></small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-2">
-                                <div className="card-body">
-                                    {item.address.city_name}
-                                </div>
-                            </div>
+                            <hr />
                         </div>
-                        </Link> </Router>
-
-                        <hr />
-                    </div>
-                );
-            })}
+                    );
+                })}
+            </div>
         </div>
     );
 }
-
 
 export default connect()(Product);

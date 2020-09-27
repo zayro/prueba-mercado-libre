@@ -1,12 +1,13 @@
 import React from "react";
 
 import ProductDetail from "../components/productDetail";
+import Product from "../components/product";
 import Home from "../components/home";
-//import NotFound from "../components/404";
+
 
 const routes = {
     "/": () => <Home />,
-    "/item": () => <Home />,
-    "/item/:id": ({id}) => <ProductDetail />,
+    "/item": () => <Product />,
+    "/item/:id": ({id}) => <ProductDetail productId={id} />,
 };
 export default routes;
