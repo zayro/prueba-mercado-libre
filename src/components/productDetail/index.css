@@ -1,0 +1,23 @@
+.card-size {
+    width:  100%;
+}
+
+
+h4 {
+    font-size: 28px;
+    padding-bottom: 32px;
+}
+
+.title {
+    font-size: 24px;
+}
+
+.price {
+    font-size: 42px;
+}
+
+.description {
+
+    padding-bottom: 32px;
+
+}

@@ -1,0 +1,90 @@
+$color-primary: #4CAF50;
+$color-secundary: #555;
+$color-menu: #1D96CB;
+
+$color-error: #CB3C1D;
+
+
+.menu-search {
+  background-color: #FFE600;
+}
+
+.menu-size {
+  padding: 5px;
+}
+
+form.example {
+  width: 100%;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 18px;
+  border: 0px solid grey;
+  border-radius: 4px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  float: left;
+  width: 94%;
+  background: #ffffff;
+}
+
+form.example input[type=text]:focus {
+  border: 0px;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 6%;
+  padding: 10px;
+  background: #EEEEEE;
+  color: white;
+  border: 0px solid grey;
+  font-size: 18px;
+  border-radius: 4px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+
+  border-left: none;
+  /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #EEEEEE;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+.container{
+  background-color: white;
+}
+
+.centerProduct{
+  margin-top: 32px;
+}
+
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
