@@ -6,7 +6,7 @@ import Buscar_small from "./assets/images/buscar-small.png";
 
 import queryString from "query-string";
 
-import {useRoutes} from 'hookrouter';
+import {useRoutes, A} from 'hookrouter';
 import Routes from './route'
 
 import NotFound from "./components/404";
@@ -48,11 +48,11 @@ function App() {
                     <div className=" mx-auto ">
                         <div className="row  menu-search ">
                             <div className="col-2">
-                            <a href="/">
+                            <A href="/">
                                 <div className="navbar-brand-edit">
                                 <img src={Logo_small} alt="logo"></img>
                                 </div>
-                                </a>
+                                </A>
                             </div>
                             <div className="col-10-edit">
                                 <form className="example" action="/item">
@@ -66,12 +66,12 @@ function App() {
                                         value={datos}
                                     ></input>
                                     <button type="button" >
-                                        <a href={`/item?search=${datos}`}>
+                                        <A href={`/item?search=${datos}`}>
                                             <img
                                                 src={Buscar_small}
                                                 alt="search"
                                             />
-                                        </a>
+                                        </A>
                                     </button>
                                 </form>
                             </div>
