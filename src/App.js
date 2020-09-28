@@ -4,11 +4,9 @@ import "./style/menu.scss";
 import Logo_small from "./assets/images/logo-small.png";
 import Buscar_small from "./assets/images/buscar-small.png";
 
-import Product from "./components/product";
-
 import queryString from "query-string";
 
-import {useRoutes, useRedirect} from 'hookrouter';
+import {useRoutes} from 'hookrouter';
 import Routes from './route'
 
 import NotFound from "./components/404";
@@ -19,12 +17,6 @@ function App() {
     const routeResult = useRoutes(Routes)
 
     const [datos, setDatos] = useState("");
-    const [search, setSearch] = useState("");
-
-    const handleClick = () => {
-        //window.location.replace("/");
-        setSearch(datos);
-    };
 
 
 
@@ -36,7 +28,7 @@ function App() {
             console.log(params.search);
             console.log(typeof params);
             setDatos(params.search);
-            setSearch(params.search);
+
         }
     }, []);
 
@@ -57,12 +49,12 @@ function App() {
                         <div className="row  menu-search ">
                             <div className="col-2">
                             <a href="/">
-                                <div className="navbar-brand">
+                                <div className="navbar-brand-edit">
                                 <img src={Logo_small} alt="logo"></img>
                                 </div>
                                 </a>
                             </div>
-                            <div className="col-10">
+                            <div className="col-10-edit">
                                 <form className="example" action="/item">
                                     <input
                                         placeholder="Nunca dejes de buscar"
@@ -73,7 +65,7 @@ function App() {
 
                                         value={datos}
                                     ></input>
-                                    <button type="button" onClick={handleClick}>
+                                    <button type="button" >
                                         <a href={`/item?search=${datos}`}>
                                             <img
                                                 src={Buscar_small}

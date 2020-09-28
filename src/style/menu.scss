@@ -1,16 +1,25 @@
-$color-primary: #4CAF50;
-$color-secundary: #555;
-$color-menu: #1D96CB;
 
-$color-error: #CB3C1D;
+// Utilities
+@import "global";
 
 
 .menu-search {
-  background-color: #FFE600;
+  background-color: $color-menu-primary;
 }
 
 .menu-size {
-  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.navbar-brand-edit {
+  display: inline-block;
+  /* padding-top: 0.3125rem; */
+  /* padding-bottom: 0.3125rem; */
+  /* margin-right: 1rem; */
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
 }
 
 form.example {
@@ -19,7 +28,7 @@ form.example {
 
 /* Style the search field */
 form.example input[type=text] {
-  padding: 10px;
+  padding: 5px;
   font-size: 18px;
   border: 0px solid grey;
   border-radius: 4px;
@@ -36,9 +45,9 @@ form.example input[type=text]:focus {
 
 /* Style the submit button */
 form.example button {
-  float: left;
+
   width: 6%;
-  padding: 10px;
+  padding: 5px;
   background: #EEEEEE;
   color: white;
   border: 0px solid grey;
@@ -69,7 +78,7 @@ form.example::after {
 }
 
 .centerProduct{
-  margin-top: 32px;
+  //margin-top: 32px;
 }
 
 
@@ -87,4 +96,13 @@ a:hover {
 
 a:active {
   text-decoration: none;
+}
+
+.col-10-edit {
+  flex: 0 0 83.333333%;
+  max-width: 83.333333%;
+  position: relative;
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 15px;
 }

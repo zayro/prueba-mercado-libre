@@ -69,10 +69,10 @@ function Product({ search }) {
         <div>
             <div className="row">
                 <div className="breadcrumbStyle">
-                    <ol className="breadcrumb">
+                    <ol className="breadcrumb-edit">
                         {category.map(function (item, index) {
                             return (
-                                <li className="breadcrumb-item" key={index}>
+                                <li className="breadcrumb-item-edit" key={index}>
                                     {item.name}
                                 </li>
                             );
@@ -89,18 +89,18 @@ function Product({ search }) {
                                 className="row"
                                 onClick={() => redirect(item.id)}
                             >
-                                <div className="col-md-4 mx-auto text-center">
+                                <div className="col-md-3 mx-auto text-center">
                                     <div className="mx-auto ">
                                         <img
                                             src={item.thumbnail}
                                             className=" mx-auto "
-                                            alt="Responsive"
+                                            alt="  img-round"
                                             width="180"
                                             height="180"
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-7">
                                     <div className="card-body">
                                         <h5 className="card-title">
                                             $ {item.price.toLocaleString()}

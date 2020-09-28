@@ -1,0 +1,44 @@
+/**
+* LIST OF COLORS
+*/
+$color-menu-primary: #FFE600;
+$color-content-primary: #333333;
+$color-content-secondary: #666666;
+$color-content-third: #999999;
+$color-background: #eeeeee;
+$color-btn-detail: #3483Fa;
+
+$color-error: #CB3C1D;
+
+.breadcrumbStyle {
+    width: 100%;
+}
+
+
+.breadcrumb-edit {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: $color-background;
+    //border-radius: 0.25rem;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: $color-content-third;
+
+}
+
+.breadcrumb-item-edit+.breadcrumb-item-edit::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    color: $color-content-third;
+    content: ">";
+}
+
+.btn-primary-edit {
+    color: #fff;
+    background-color: $color-btn-detail;
+    border-color: $color-btn-detail;
+}
