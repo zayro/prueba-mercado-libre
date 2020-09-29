@@ -10,13 +10,15 @@ import queryString from "query-string";
 import { navigate } from "hookrouter";
 
 function Product({ search }) {
+
+    // create state
     const [filter, setFilter] = useState([]);
     const [category, setCategory] = useState([]);
 
 
 
+    // control cycle life of component
     useEffect(() => {
-
 
         const fetchData = (search) => {
             axios

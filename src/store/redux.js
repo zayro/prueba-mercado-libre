@@ -3,11 +3,11 @@ export const initialState = {
     menus: [
       {
         id: 1,
-        nombre: 'Read a bit'
+        nombre: 'Item1'
       },
       {
         id: 2,
-        nombre: 'Do laundry'
+        nombre: 'Item2'
       }
     ]
   };

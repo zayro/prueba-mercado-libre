@@ -5,12 +5,17 @@ import { connect } from "react-redux";
 import "./index.scss";
 
 function ProductDetail({ productId }) {
+
+    // create state
     const [info, setInfo] = useState([]);
     const [descrip, setDescrip] = useState([]);
     const [category, setCategory] = useState([]);
     const [currency, setCurrency] = useState([]);
 
+    // control cycle life of component
     useEffect(() => {
+
+        // create request asyn
         const category = async (categoryId) => {
             const response = await axios.get(
                 `https://api.mercadolibre.com/sites/MLA/search?category=${categoryId}`
@@ -28,9 +33,9 @@ function ProductDetail({ productId }) {
             console.log(data);
             setCurrency(data.data.symbol);
 
-            //setCategory(data.data.filters[0].values[0].path_from_root);
         };
 
+        // create arrow function to capture information about product
         const fetchData = () => {
             axios
                 .request({
@@ -113,7 +118,7 @@ function ProductDetail({ productId }) {
                                         </p>
                                         <h5 className="title">{item.title}</h5>
                                         <p className="price">
-                                            {currency}{" "}
+                                            {currency}
                                             {item.price.toLocaleString()}
                                         </p>
                                         <p className="card-text">

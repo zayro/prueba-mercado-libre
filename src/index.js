@@ -7,8 +7,7 @@ import store from "./store";
 
 import * as serviceWorker from "./serviceWorker";
 
-
-
+// import library
 import "jquery";
 import "bootstrap/dist/css/bootstrap.css";
 

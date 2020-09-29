@@ -19,16 +19,16 @@ function App() {
     const [datos, setDatos] = useState("");
 
     useEffect(() => {
+
         let params = queryString.parse(document.location.search);
-        console.log(params);
 
         if (
             params !== "" &&
             typeof params !== "undefined" &&
             Object.keys(params).length !== 0
         ) {
-            console.log(params.search);
-            console.log(typeof params);
+            console.log(params.search, typeof params);
+
             setDatos(params.search);
         }
     }, []);
@@ -78,7 +78,7 @@ function App() {
             </div>
 
             <div className="container">
-                <div className="centerProduct">{routeResult || NotFound}</div>
+                <div className="centerProduct">{routeResult || <NotFound/> }</div>
             </div>
         </div>
     );
